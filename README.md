@@ -1,6 +1,14 @@
 # Blanq — Bulk Chat Cleaner for ChatGPT
 
+[![GitHub stars](https://img.shields.io/github/stars/llavkush/blanq?style=flat&logo=github)](https://github.com/llavkush/blanq/stargazers)
+[![Latest release](https://img.shields.io/github/v/release/llavkush/blanq?style=flat)](https://github.com/llavkush/blanq/releases/latest)
+[![License](https://img.shields.io/github/license/llavkush/blanq?style=flat)](LICENSE)
+
 A Chrome extension to bulk-delete, unarchive, and unpin ChatGPT conversations. Because ChatGPT's web UI only lets you delete chats one by one or all at once.
+
+**Website:** https://llavkush.github.io/blanq/
+
+If Blanq saves you time, please ⭐ [star the repo](https://github.com/llavkush/blanq) — it genuinely helps others find it.
 
 ## Features
 
@@ -38,6 +46,10 @@ Uses ChatGPT's internal `/backend-api/conversations` endpoints with the access t
 - OpenAI may change their internal API at any time, breaking this extension
 - Deleting is permanent (same as the regular UI)
 - Very large histories (10k+ chats) take a few seconds to load initially
+
+## License
+
+MIT — free to use, modify, distribute, and sell, with the copyright notice preserved. See [LICENSE](LICENSE).
 
 ## Disclaimer
 

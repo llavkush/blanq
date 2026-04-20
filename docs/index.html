@@ -189,6 +189,25 @@
       padding: 14px 4px;
     }
     .btn-ghost:hover { color: var(--text); background: transparent; }
+    .btn-star {
+      background: var(--bg);
+      color: var(--text);
+      border: 1px solid var(--border);
+    }
+    .btn-star:hover {
+      border-color: var(--accent);
+      background: var(--accent-soft);
+      color: var(--accent);
+    }
+    .btn-star svg { color: #eac54f; }
+    .hero-badges {
+      display: inline-flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-top: 28px;
+    }
+    .hero-badges img { height: 22px; }
 
     .hero-banner {
       margin: 56px auto 0;
@@ -437,6 +456,11 @@
       border-color: rgba(255,255,255,0.5);
       transform: translateY(-1px);
     }
+    .btn.is-disabled {
+      cursor: not-allowed;
+      opacity: 0.55;
+      pointer-events: none;
+    }
 
     /* Install steps */
     .install-steps {
@@ -478,6 +502,54 @@
       border-top: 1px dashed var(--border);
       font-size: 13px;
       color: var(--text-muted);
+    }
+
+    /* Feedback card */
+    .feedback-card {
+      max-width: 640px;
+      margin: 32px auto 0;
+      text-align: center;
+      padding: 32px 28px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      background: var(--bg-elevated);
+    }
+    .feedback-card h3 {
+      margin: 0 0 8px;
+      font-size: 20px;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      color: var(--text);
+    }
+    .feedback-card p {
+      color: var(--text-muted);
+      margin: 0 0 20px;
+      font-size: 15px;
+    }
+    .feedback-actions {
+      display: inline-flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .btn-outline {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 22px;
+      border-radius: 10px;
+      font-weight: 600;
+      font-size: 14px;
+      border: 1px solid var(--border);
+      background: var(--bg);
+      color: var(--text);
+      transition: transform 0.08s, border-color 0.15s, background 0.15s;
+    }
+    .btn-outline:hover {
+      border-color: var(--accent);
+      background: var(--accent-soft);
+      color: var(--accent);
+      transform: translateY(-1px);
     }
 
     /* Footer */
@@ -542,7 +614,16 @@
             Add to Chrome
             <span>→</span>
           </a>
+          <a href="https://github.com/llavkush/blanq" target="_blank" rel="noopener" class="btn btn-star">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 .25a.75.75 0 0 1 .673.418l1.882 3.815 4.21.612a.75.75 0 0 1 .416 1.279l-3.046 2.97.719 4.192a.75.75 0 0 1-1.088.791L8 12.347l-3.766 1.98a.75.75 0 0 1-1.088-.79l.72-4.194L.818 6.374a.75.75 0 0 1 .416-1.28l4.21-.611L7.327.668A.75.75 0 0 1 8 .25z"/></svg>
+            Star on GitHub
+          </a>
           <a href="#how" class="btn btn-ghost">See how it works</a>
+        </div>
+        <div class="hero-badges">
+          <img src="https://img.shields.io/github/stars/llavkush/blanq?style=flat&logo=github&labelColor=24292f&color=10a37f" alt="GitHub stars" />
+          <img src="https://img.shields.io/github/v/release/llavkush/blanq?style=flat&labelColor=24292f&color=10a37f" alt="Latest release" />
+          <img src="https://img.shields.io/github/license/llavkush/blanq?style=flat&labelColor=24292f&color=10a37f" alt="License" />
         </div>
         <div class="hero-banner">
           <img src="assets/banner.png" alt="Blanq preview — bulk delete GPT chats" />
@@ -666,9 +747,9 @@
             <a href="https://github.com/llavkush/blanq/releases/latest/download/blanq-extension.zip" class="btn btn-primary">
               Download ZIP
             </a>
-            <a href="https://chromewebstore.google.com/" target="_blank" rel="noopener" class="btn btn-ghost-invert">
-              Chrome Web Store
-            </a>
+            <span class="btn btn-ghost-invert is-disabled" aria-disabled="true" title="Chrome Web Store listing coming soon">
+              Chrome Web Store — Coming soon
+            </span>
           </div>
         </div>
 
@@ -683,6 +764,20 @@
           </ol>
           <p class="install-note">Chrome may disable unpacked extensions on restart. Keeping the folder in a stable location avoids this.</p>
         </div>
+
+        <div class="feedback-card">
+          <h3>Found a bug? Want a feature?</h3>
+          <p>Blanq is open source. Report issues, suggest features, or just say hi on GitHub.</p>
+          <div class="feedback-actions">
+            <a href="https://github.com/llavkush/blanq/issues/new" target="_blank" rel="noopener" class="btn btn-outline">
+              Open an issue on GitHub
+            </a>
+            <a href="https://github.com/llavkush/blanq" target="_blank" rel="noopener" class="btn btn-outline">
+              <svg width="15" height="15" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 .25a.75.75 0 0 1 .673.418l1.882 3.815 4.21.612a.75.75 0 0 1 .416 1.279l-3.046 2.97.719 4.192a.75.75 0 0 1-1.088.791L8 12.347l-3.766 1.98a.75.75 0 0 1-1.088-.79l.72-4.194L.818 6.374a.75.75 0 0 1 .416-1.28l4.21-.611L7.327.668A.75.75 0 0 1 8 .25z"/></svg>
+              Star on GitHub
+            </a>
+          </div>
+        </div>
       </div>
     </section>
   </main>
@@ -695,6 +790,8 @@
         </div>
         <div class="footer-links">
           <a href="privacy.html">Privacy</a>
+          <a href="https://github.com/llavkush/blanq" target="_blank" rel="noopener">GitHub</a>
+          <a href="https://github.com/llavkush/blanq/issues" target="_blank" rel="noopener">Issues &amp; feedback</a>
         </div>
       </div>
       <div class="disclaimer">

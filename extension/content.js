@@ -104,10 +104,14 @@ function createPanel() {
         <p class="delgpt-help-p delgpt-links">
           <a href="https://llavkush.github.io/blanq/" target="_blank" rel="noopener">Home</a>
           <span>·</span>
-          <a href="https://llavkush.github.io/blanq/privacy.html" target="_blank" rel="noopener">Privacy policy</a>
+          <a href="https://llavkush.github.io/blanq/privacy.html" target="_blank" rel="noopener">Privacy</a>
           <span>·</span>
-          <a href="https://github.com/llavkush/blanq" target="_blank" rel="noopener">GitHub</a>
+          <a href="https://github.com/llavkush/blanq/issues/new" target="_blank" rel="noopener">Report a bug</a>
         </p>
+        <a class="delgpt-star-link" href="https://github.com/llavkush/blanq" target="_blank" rel="noopener">
+          <span class="delgpt-star-icon">★</span>
+          Star on GitHub — it helps others find Blanq
+        </a>
       </div>
     </div>
     <div class="delgpt-controls">
@@ -615,10 +619,10 @@ function showThankYou(deletedCount) {
       <div class="delgpt-thanks-emoji">✨</div>
       <div class="delgpt-thanks-title">Thanks for using Blanq!</div>
       <div class="delgpt-thanks-sub">${deletedCount} ${deletedCount === 1 ? "chat" : "chats"} cleaned up.</div>
-      <p class="delgpt-thanks-body">If Blanq saved you time, a quick review on the Chrome Web Store really helps others find it.</p>
+      <p class="delgpt-thanks-body">Chrome Web Store listing is coming soon. For now, a ⭐ on GitHub helps others find Blanq.</p>
       <div class="delgpt-thanks-actions">
         <button class="delgpt-btn-secondary" data-action="later">Maybe later</button>
-        <a class="delgpt-btn-primary" href="https://chromewebstore.google.com/" target="_blank" rel="noopener" data-action="review">Leave a review</a>
+        <a class="delgpt-btn-primary" href="https://github.com/llavkush/blanq" target="_blank" rel="noopener" data-action="review">Star on GitHub</a>
       </div>
     </div>
   `;

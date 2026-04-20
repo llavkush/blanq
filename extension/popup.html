@@ -29,6 +29,27 @@
         margin-top: 4px;
       }
       .links span { color: #c0c0c0; }
+      .star-cta {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 6px;
+        padding: 8px 12px;
+        margin: 4px 0 12px;
+        border: 1px solid #ececec;
+        border-radius: 6px;
+        font-size: 12px;
+        font-weight: 600;
+        color: #0d0d0d;
+        text-decoration: none;
+        transition: border-color 0.15s, background 0.15s;
+      }
+      .star-cta:hover {
+        border-color: #10a37f;
+        background: #ecfdf5;
+        color: #10a37f;
+      }
+      .star-icon { color: #eac54f; }
       @media (prefers-color-scheme: dark) {
         body { background: #212121; color: #ececec; }
         p, ol { color: #b4b4b4; }
@@ -36,6 +57,8 @@
         .tag, small { color: #8e8e8e; }
         .links { border-top-color: #2f2f2f; }
         .links span { color: #4a4a4a; }
+        .star-cta { border-color: #2f2f2f; color: #ececec; }
+        .star-cta:hover { background: rgba(16,163,127,0.1); border-color: #10a37f; color: #10a37f; }
       }
     </style>
   </head>
@@ -49,12 +72,15 @@
     </ol>
     <p><small>All actions use your logged-in session. No data leaves your browser.</small></p>
     <p><small>Unofficial — not affiliated with OpenAI.</small></p>
+    <a class="star-cta" href="https://github.com/llavkush/blanq" target="_blank">
+      <span class="star-icon">★</span> Star on GitHub
+    </a>
     <div class="links">
       <a href="https://llavkush.github.io/blanq/" target="_blank">Home</a>
       <span>·</span>
       <a href="https://llavkush.github.io/blanq/privacy.html" target="_blank">Privacy</a>
       <span>·</span>
-      <a href="https://github.com/llavkush/blanq" target="_blank">GitHub</a>
+      <a href="https://github.com/llavkush/blanq/issues/new" target="_blank">Report bug</a>
     </div>
   </body>
 </html>
