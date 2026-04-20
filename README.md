@@ -49,7 +49,7 @@ Uses ChatGPT's internal `/backend-api/conversations` endpoints with the access t
 
 ## License
 
-MIT — free to use, modify, distribute, and sell, with the copyright notice preserved. See [LICENSE](LICENSE).
+PolyForm Noncommercial 1.0.0 — free to use, modify, and distribute for **noncommercial purposes** only. Commercial use requires a separate license. See [LICENSE](LICENSE).
 
 ## Disclaimer
 
