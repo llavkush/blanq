@@ -1,0 +1,628 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Blanq — Bulk Chat Cleaner for ChatGPT</title>
+  <meta name="description" content="Bulk select, filter, and delete your ChatGPT conversations. A clean, private Chrome extension that runs entirely in your browser." />
+  <meta property="og:title" content="Blanq — Bulk Chat Cleaner for ChatGPT" />
+  <meta property="og:description" content="Clean up your ChatGPT chat history in seconds. Free Chrome extension. No data collected." />
+  <meta property="og:image" content="icons/banner.png" />
+  <meta property="og:type" content="website" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <style>
+    :root {
+      --bg: #ffffff;
+      --bg-sub: #f7f8f7;
+      --bg-elevated: #ffffff;
+      --border: #e5e7e5;
+      --text: #0d0d0d;
+      --text-dim: #3d3d3d;
+      --text-muted: #6b7280;
+      --accent: #10a37f;
+      --accent-hover: #0e8f6e;
+      --accent-soft: #ecfdf5;
+      --radius: 14px;
+      --shadow-sm: 0 1px 2px rgba(0,0,0,0.04);
+      --shadow: 0 4px 14px rgba(0,0,0,0.08);
+      --shadow-lg: 0 20px 60px rgba(0,0,0,0.12);
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #0b0b0b;
+        --bg-sub: #141414;
+        --bg-elevated: #181818;
+        --border: #262626;
+        --text: #f5f5f5;
+        --text-dim: #d4d4d4;
+        --text-muted: #8f8f8f;
+        --accent-soft: #0f2a22;
+        --shadow-lg: 0 20px 60px rgba(0,0,0,0.6);
+      }
+    }
+
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      font-size: 16px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+    .wrap { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
+
+    /* Nav */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: rgba(255,255,255,0.85);
+      backdrop-filter: saturate(180%) blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+    @media (prefers-color-scheme: dark) {
+      nav { background: rgba(11,11,11,0.8); }
+    }
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 0;
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 700;
+      font-size: 17px;
+      letter-spacing: -0.01em;
+    }
+    .brand-mark {
+      width: 32px;
+      height: 32px;
+      background: var(--text);
+      color: var(--bg);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+    }
+    .nav-links {
+      display: flex;
+      gap: 24px;
+      align-items: center;
+      font-size: 14px;
+      color: var(--text-muted);
+    }
+    .nav-links a:hover { color: var(--text); }
+    .nav-cta {
+      background: var(--text);
+      color: var(--bg);
+      padding: 8px 14px;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 13px;
+    }
+    .nav-cta:hover { background: var(--accent); color: #fff; }
+
+    /* Hero */
+    .hero {
+      padding: 72px 0 56px;
+      text-align: center;
+    }
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 12px;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--text-muted);
+      margin-bottom: 24px;
+    }
+    .badge-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--accent);
+      animation: pulse 2s ease-in-out infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.4; }
+    }
+    h1 {
+      font-size: clamp(38px, 6vw, 64px);
+      line-height: 1.05;
+      letter-spacing: -0.03em;
+      margin: 0 0 20px;
+      font-weight: 800;
+    }
+    h1 .accent {
+      background: linear-gradient(135deg, var(--accent) 0%, #34d399 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    .hero-sub {
+      font-size: clamp(17px, 2vw, 20px);
+      color: var(--text-dim);
+      max-width: 620px;
+      margin: 0 auto 32px;
+      line-height: 1.55;
+    }
+    .hero-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 24px;
+      border-radius: 10px;
+      font-weight: 600;
+      font-size: 15px;
+      border: none;
+      cursor: pointer;
+      transition: transform 0.08s, background 0.15s;
+      font-family: inherit;
+    }
+    .btn:hover { transform: translateY(-1px); }
+    .btn-primary {
+      background: var(--text);
+      color: var(--bg);
+    }
+    .btn-primary:hover { background: var(--accent); color: #fff; }
+    .btn-ghost {
+      color: var(--text-dim);
+      background: transparent;
+      padding: 14px 4px;
+    }
+    .btn-ghost:hover { color: var(--text); background: transparent; }
+
+    .hero-banner {
+      margin: 56px auto 0;
+      max-width: 680px;
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow-lg);
+      border: 1px solid var(--border);
+    }
+
+    /* Sections */
+    section {
+      padding: 80px 0;
+    }
+    .section-label {
+      color: var(--accent);
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.6px;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+    h2 {
+      font-size: clamp(28px, 4vw, 42px);
+      letter-spacing: -0.02em;
+      margin: 0 0 16px;
+      font-weight: 700;
+      line-height: 1.15;
+    }
+    .section-sub {
+      color: var(--text-muted);
+      font-size: 17px;
+      max-width: 580px;
+      margin-bottom: 40px;
+    }
+    .section-head { text-align: center; margin-bottom: 56px; }
+    .section-head .section-sub { margin: 0 auto; }
+
+    /* Feature grid */
+    .features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 20px;
+    }
+    .feature {
+      background: var(--bg-elevated);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 24px;
+      transition: transform 0.15s, box-shadow 0.15s, border-color 0.15s;
+    }
+    .feature:hover {
+      transform: translateY(-2px);
+      border-color: var(--accent);
+      box-shadow: var(--shadow);
+    }
+    .feature-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 10px;
+      background: var(--accent-soft);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 14px;
+      font-size: 20px;
+    }
+    .feature h3 {
+      margin: 0 0 6px;
+      font-size: 16px;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+    }
+    .feature p {
+      margin: 0;
+      color: var(--text-muted);
+      font-size: 14px;
+      line-height: 1.55;
+    }
+
+    /* How it works */
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 24px;
+      counter-reset: step;
+    }
+    .step {
+      position: relative;
+      padding: 28px 24px 24px;
+      background: var(--bg-sub);
+      border-radius: var(--radius);
+      counter-increment: step;
+    }
+    .step::before {
+      content: counter(step);
+      position: absolute;
+      top: -16px;
+      left: 24px;
+      width: 32px;
+      height: 32px;
+      background: var(--text);
+      color: var(--bg);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 14px;
+    }
+    .step h3 {
+      margin: 6px 0 6px;
+      font-size: 16px;
+      font-weight: 600;
+    }
+    .step p {
+      color: var(--text-muted);
+      font-size: 14px;
+      margin: 0;
+      line-height: 1.55;
+    }
+
+    /* Privacy block */
+    .privacy-card {
+      background: linear-gradient(135deg, var(--accent-soft), var(--bg-sub));
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 48px 40px;
+      text-align: center;
+    }
+    .privacy-card h2 { margin-top: 0; }
+    .privacy-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      justify-content: center;
+      margin-top: 28px;
+    }
+    .privacy-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 16px;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--text-dim);
+    }
+    .privacy-pill .check {
+      color: var(--accent);
+      font-weight: 700;
+    }
+
+    /* FAQ */
+    .faq {
+      max-width: 740px;
+      margin: 0 auto;
+    }
+    details {
+      border-bottom: 1px solid var(--border);
+      padding: 20px 0;
+    }
+    details:first-child { border-top: 1px solid var(--border); }
+    summary {
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 17px;
+      list-style: none;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      color: var(--text);
+    }
+    summary::-webkit-details-marker { display: none; }
+    summary::after {
+      content: "+";
+      font-size: 22px;
+      color: var(--text-muted);
+      font-weight: 400;
+      transition: transform 0.2s;
+    }
+    details[open] summary::after {
+      content: "−";
+      transform: rotate(180deg);
+    }
+    details p {
+      margin: 12px 0 0;
+      color: var(--text-dim);
+      line-height: 1.65;
+    }
+
+    /* CTA band */
+    .cta-band {
+      background: var(--text);
+      color: var(--bg);
+      border-radius: 24px;
+      padding: 56px 32px;
+      text-align: center;
+      margin: 40px 0 80px;
+    }
+    .cta-band h2 {
+      color: inherit;
+      margin-bottom: 12px;
+    }
+    .cta-band p {
+      color: rgba(255,255,255,0.7);
+      max-width: 480px;
+      margin: 0 auto 28px;
+    }
+    @media (prefers-color-scheme: dark) {
+      .cta-band { background: var(--accent); color: #fff; }
+      .cta-band p { color: rgba(255,255,255,0.85); }
+    }
+    .cta-band .btn-primary {
+      background: var(--bg);
+      color: var(--text);
+    }
+    .cta-band .btn-primary:hover { background: var(--accent); color: #fff; }
+    @media (prefers-color-scheme: dark) {
+      .cta-band .btn-primary { background: #fff; color: var(--accent); }
+    }
+
+    /* Footer */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 40px 0 48px;
+      color: var(--text-muted);
+      font-size: 14px;
+    }
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+    footer a:hover { color: var(--text); }
+    .footer-links { display: flex; gap: 20px; flex-wrap: wrap; }
+    .disclaimer {
+      margin-top: 20px;
+      padding-top: 20px;
+      border-top: 1px dashed var(--border);
+      font-size: 12px;
+      color: var(--text-muted);
+      max-width: 700px;
+    }
+
+    @media (max-width: 640px) {
+      .hero { padding: 40px 0 32px; }
+      section { padding: 56px 0; }
+      .cta-band { padding: 40px 24px; }
+      .nav-links a:not(.nav-cta) { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="wrap nav-inner">
+      <a href="#top" class="brand">
+        <span class="brand-mark">B</span>
+        <span>Blanq</span>
+      </a>
+      <div class="nav-links">
+        <a href="#features">Features</a>
+        <a href="#how">How it works</a>
+        <a href="#faq">FAQ</a>
+        <a href="privacy.html">Privacy</a>
+        <a href="#install" class="nav-cta">Install</a>
+      </div>
+    </div>
+  </nav>
+
+  <main id="top">
+    <section class="hero">
+      <div class="wrap">
+        <div class="badge"><span class="badge-dot"></span>Free · Open source · No tracking</div>
+        <h1>Clean up your <span class="accent">ChatGPT chats</span><br/>in seconds.</h1>
+        <p class="hero-sub">Blanq adds bulk select, smart filters, and one-click delete to ChatGPT — so you can finally tidy months of clutter without clicking a hundred trash icons.</p>
+        <div class="hero-cta">
+          <a href="#install" class="btn btn-primary">
+            Add to Chrome
+            <span>→</span>
+          </a>
+          <a href="#how" class="btn btn-ghost">See how it works</a>
+        </div>
+        <div class="hero-banner">
+          <img src="assets/banner.png" alt="Blanq preview — bulk delete GPT chats" />
+        </div>
+      </div>
+    </section>
+
+    <section id="features">
+      <div class="wrap">
+        <div class="section-head">
+          <div class="section-label">Features</div>
+          <h2>Everything you need. Nothing you don't.</h2>
+          <p class="section-sub">Built for people drowning in old chats. Minimal UI, ruthless cleanup.</p>
+        </div>
+        <div class="features">
+          <div class="feature">
+            <div class="feature-icon">✓</div>
+            <h3>Bulk multi-select</h3>
+            <p>Tick as many chats as you want. Delete them all with a single click and a confirmation.</p>
+          </div>
+          <div class="feature">
+            <div class="feature-icon">⚡</div>
+            <h3>Smart presets</h3>
+            <p>Today · This week · Older than 30/90/365 days · Duplicates · Untitled · Unpinned. One click selects them all.</p>
+          </div>
+          <div class="feature">
+            <div class="feature-icon">🔍</div>
+            <h3>Title search</h3>
+            <p>Filter instantly as you type. Combine with scope chips to narrow to exactly what you want.</p>
+          </div>
+          <div class="feature">
+            <div class="feature-icon">🗂</div>
+            <h3>Active + Archived + Pinned</h3>
+            <p>Manage everything. Scope chips let you switch between normal chats, archived, and pinned in one tap.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="how" style="background: var(--bg-sub);">
+      <div class="wrap">
+        <div class="section-head">
+          <div class="section-label">How it works</div>
+          <h2>Three clicks from messy to empty.</h2>
+        </div>
+        <div class="steps">
+          <div class="step">
+            <h3>Install & open ChatGPT</h3>
+            <p>After installing, a small Blanq button appears in the bottom-right on chatgpt.com.</p>
+          </div>
+          <div class="step">
+            <h3>Filter & select</h3>
+            <p>Pick a preset like "Older than 90 days" or tick individual chats. Search to narrow down first.</p>
+          </div>
+          <div class="step">
+            <h3>Delete in one click</h3>
+            <p>Confirm and watch the progress bar. Blanq throttles requests to stay friendly with ChatGPT.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="wrap">
+        <div class="privacy-card">
+          <div class="section-label">Privacy first</div>
+          <h2>Your chats never leave your browser.</h2>
+          <p class="section-sub" style="margin: 0 auto;">Blanq has no servers, no analytics, no tracking, no telemetry. Every action runs locally using your own ChatGPT session.</p>
+          <div class="privacy-list">
+            <span class="privacy-pill"><span class="check">✓</span>Zero data collected</span>
+            <span class="privacy-pill"><span class="check">✓</span>No external servers</span>
+            <span class="privacy-pill"><span class="check">✓</span>No login required</span>
+            <span class="privacy-pill"><span class="check">✓</span>Open source</span>
+          </div>
+          <p style="margin-top: 28px;"><a href="privacy.html" style="color: var(--accent); font-weight: 600;">Read the privacy policy →</a></p>
+        </div>
+      </div>
+    </section>
+
+    <section id="faq">
+      <div class="wrap">
+        <div class="section-head">
+          <div class="section-label">FAQ</div>
+          <h2>Common questions</h2>
+        </div>
+        <div class="faq">
+          <details>
+            <summary>Is Blanq official / from OpenAI?</summary>
+            <p>No. Blanq is an independent third-party tool. It is not affiliated with, endorsed by, or sponsored by OpenAI. "ChatGPT" and "GPT" are trademarks of OpenAI.</p>
+          </details>
+          <details>
+            <summary>Is this safe? Could my account get banned?</summary>
+            <p>Blanq only performs actions you can already perform in the normal ChatGPT UI — delete, unarchive, unpin — just in bulk. It uses your own logged-in session, throttles requests to avoid flagging, and asks for confirmation before every bulk action.</p>
+          </details>
+          <details>
+            <summary>Does it collect my conversations?</summary>
+            <p>No. Blanq never reads chat content. It only fetches the list of conversation titles and timestamps that ChatGPT's own sidebar already loads. Nothing leaves your browser.</p>
+          </details>
+          <details>
+            <summary>Can I recover deleted chats?</summary>
+            <p>No — deletion is permanent, just like ChatGPT's own delete button. That's why Blanq always asks for confirmation first. If you're nervous, start by archiving or use the "Older than 365 days" preset.</p>
+          </details>
+          <details>
+            <summary>Will it work if OpenAI changes something?</summary>
+            <p>Blanq uses ChatGPT's own API endpoints. If OpenAI restructures them, Blanq may temporarily break. Updates are pushed through the Chrome Web Store when that happens.</p>
+          </details>
+          <details>
+            <summary>Is it free?</summary>
+            <p>Yes, completely. No paid tier, no trials, no hidden costs. If Blanq saved you time, a Chrome Web Store review is the best way to say thanks.</p>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <section id="install">
+      <div class="wrap">
+        <div class="cta-band">
+          <h2>Ready to start fresh?</h2>
+          <p>Install Blanq and take back your sidebar in under a minute.</p>
+          <a href="https://chromewebstore.google.com/" target="_blank" rel="noopener" class="btn btn-primary">
+            Add to Chrome — It's free
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <div class="footer-inner">
+        <div>
+          <div style="font-weight: 700; color: var(--text); margin-bottom: 4px;">Blanq</div>
+        </div>
+        <div class="footer-links">
+          <a href="privacy.html">Privacy</a>
+        </div>
+      </div>
+      <div class="disclaimer">
+        Blanq is an independent, unofficial tool. It is not affiliated with, endorsed by, or sponsored by OpenAI. "ChatGPT" and "GPT" are trademarks of OpenAI.
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>

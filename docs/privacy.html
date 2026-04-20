@@ -1,0 +1,206 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Privacy Policy — Blanq</title>
+  <meta name="description" content="Blanq does not collect, store, or transmit any user data. Privacy policy for the Blanq browser extension." />
+  <style>
+    :root {
+      --bg: #ffffff;
+      --bg-sub: #fafafa;
+      --border: #ececec;
+      --text: #0d0d0d;
+      --text-dim: #404040;
+      --text-muted: #6b6b6b;
+      --accent: #10a37f;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #0d0d0d;
+        --bg-sub: #1a1a1a;
+        --border: #2a2a2a;
+        --text: #ececec;
+        --text-dim: #c0c0c0;
+        --text-muted: #8e8e8e;
+      }
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      font-size: 16px;
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+    }
+    .wrap {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 48px 24px 80px;
+    }
+    header {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 32px;
+    }
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      background: var(--text);
+      color: var(--bg);
+      font-weight: 800;
+      font-size: 18px;
+      letter-spacing: -0.02em;
+    }
+    .brand-text { font-weight: 600; font-size: 18px; letter-spacing: -0.01em; }
+    .brand-sub { font-size: 12px; color: var(--text-muted); display: block; margin-top: 1px; }
+    h1 { font-size: 32px; letter-spacing: -0.02em; margin: 0 0 8px; }
+    .dates { color: var(--text-muted); font-size: 14px; margin-bottom: 24px; }
+    h2 {
+      font-size: 19px;
+      letter-spacing: -0.01em;
+      margin: 36px 0 10px;
+      color: var(--text);
+    }
+    h3 { font-size: 15px; margin: 20px 0 6px; color: var(--text); }
+    p { color: var(--text-dim); margin: 0 0 14px; }
+    ul { color: var(--text-dim); padding-left: 22px; margin: 8px 0 14px; }
+    li { margin-bottom: 4px; }
+    strong { color: var(--text); }
+    code {
+      background: var(--bg-sub);
+      border: 1px solid var(--border);
+      padding: 1px 6px;
+      border-radius: 4px;
+      font-size: 13px;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .summary {
+      background: var(--bg-sub);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 18px 20px;
+      margin: 24px 0 8px;
+    }
+    .summary strong { color: var(--accent); }
+    footer {
+      margin-top: 56px;
+      padding-top: 20px;
+      border-top: 1px solid var(--border);
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div class="brand">B</div>
+      <div>
+        <div class="brand-text">Blanq</div>
+        <span class="brand-sub">Bulk Chat Cleaner for ChatGPT</span>
+      </div>
+    </header>
+
+    <h1>Privacy Policy</h1>
+    <div class="dates">
+      <strong>Effective date:</strong> April 17, 2026 · <strong>Last updated:</strong> April 17, 2026
+    </div>
+
+    <p>This Privacy Policy describes how the <strong>Blanq</strong> browser extension handles information when you use it. Blanq is an unofficial third-party tool and is not affiliated with, endorsed by, or sponsored by OpenAI.</p>
+
+    <div class="summary">
+      <strong>Summary:</strong> Blanq does not collect, store, transmit, sell, or share any personal data. All activity happens locally in your browser, within your existing ChatGPT session. No data is sent to the extension's developer or any third party other than ChatGPT itself (which you are already using).
+    </div>
+
+    <h2>1. Information we collect</h2>
+    <p><strong>We do not collect any information.</strong> Specifically, Blanq does not collect, receive, store, or transmit:</p>
+    <ul>
+      <li>Personally identifiable information (name, email, address, phone, etc.)</li>
+      <li>Authentication information (passwords, tokens, cookies, credentials)</li>
+      <li>Personal communications (the content of your ChatGPT conversations, messages, or prompts)</li>
+      <li>Financial or payment information</li>
+      <li>Health information</li>
+      <li>Location information</li>
+      <li>Web history or browsing activity</li>
+      <li>User activity (clicks, keystrokes, mouse movements, scrolling)</li>
+      <li>Website content outside of chatgpt.com</li>
+      <li>Any analytics, telemetry, crash reports, or usage metrics</li>
+    </ul>
+
+    <h2>2. How the extension works</h2>
+    <p>Blanq runs entirely inside your browser tab on <code>chatgpt.com</code> (and <code>chat.openai.com</code>). When you use it:</p>
+    <ul>
+      <li>It reads a list of your own conversations by calling ChatGPT's own API endpoints (for example, <code>chatgpt.com/backend-api/conversations</code>) using the session you are already logged into.</li>
+      <li>It displays that list in a panel overlaid on the ChatGPT page.</li>
+      <li>When you select conversations and click Delete, it calls ChatGPT's own API to perform that action on those conversations.</li>
+    </ul>
+    <p>All of these network requests go directly from your browser to <code>chatgpt.com</code>. None of them pass through any server controlled by Blanq's developer — because there is no such server.</p>
+
+    <h2>3. Data storage</h2>
+    <p>Blanq does not use <code>chrome.storage</code>, <code>localStorage</code>, <code>IndexedDB</code>, or cookies to persist any data. Your conversation list is held only in the memory of the open tab and is discarded when the tab is closed or reloaded.</p>
+
+    <h2>4. Permissions we request and why</h2>
+    <p>Blanq requests the minimum permissions needed to function:</p>
+    <ul>
+      <li><strong>Host permission for <code>https://chatgpt.com/*</code> and <code>https://chat.openai.com/*</code></strong> — required to inject the management UI into the ChatGPT website and to call the user's own ChatGPT API endpoints (list/delete/update conversations) using their existing logged-in session. Without this permission the extension cannot function.</li>
+    </ul>
+    <p>Blanq does <strong>not</strong> request any of the following: <code>tabs</code>, <code>history</code>, <code>bookmarks</code>, <code>cookies</code>, <code>webRequest</code>, <code>downloads</code>, <code>management</code>, <code>storage</code>, <code>identity</code>, <code>geolocation</code>, <code>notifications</code>, or any host permission for any website other than ChatGPT.</p>
+
+    <h2>5. Third-party services</h2>
+    <p>Blanq does not integrate with any third-party analytics, advertising, crash-reporting, error-tracking, or data-processing services. It does not load code from remote servers. All extension code is bundled inside the extension package that Chrome Web Store reviews and installs.</p>
+    <p>The only service Blanq interacts with is ChatGPT itself (operated by OpenAI), which you are already using. Your use of ChatGPT is governed by <a href="https://openai.com/policies/privacy-policy" target="_blank" rel="noopener">OpenAI's own Privacy Policy</a>.</p>
+
+    <h2>6. Remote code</h2>
+    <p>Blanq does not download, fetch, or execute any remote code, script, WASM module, or eval'd content. The extension's JavaScript is entirely contained within the extension bundle and is reviewable in the Chrome Web Store listing.</p>
+
+    <h2>7. Children's privacy</h2>
+    <p>Blanq does not knowingly collect information from anyone, including children under 13. Since Blanq collects no information at all, this policy's effect is the same for all users regardless of age.</p>
+
+    <h2>8. Data sale and sharing</h2>
+    <p>We do not sell, rent, trade, or share any user data, because we do not collect any user data. We do not use any information for purposes unrelated to the extension's single purpose (bulk managing the user's own ChatGPT conversations).</p>
+    <p>We do not use any information to:</p>
+    <ul>
+      <li>Determine creditworthiness or for lending purposes</li>
+      <li>Build advertising profiles</li>
+      <li>Train machine-learning models</li>
+      <li>Provide to data brokers or third parties for marketing</li>
+    </ul>
+
+    <h2>9. Security</h2>
+    <p>Because Blanq does not collect or transmit data, there is no user data in our possession that could be breached. All actions taken by the extension are executed in your browser and authenticated by your own ChatGPT session, which is protected by OpenAI's security controls.</p>
+
+    <h2>10. Your choices</h2>
+    <p>You can stop all processing at any time by:</p>
+    <ul>
+      <li>Clicking the × button to close the Blanq panel</li>
+      <li>Removing the extension from <code>chrome://extensions</code></li>
+    </ul>
+    <p>Uninstalling the extension completely removes its code from your browser.</p>
+
+    <h2>11. Changes to this policy</h2>
+    <p>If this policy changes in the future, we will update the "Last updated" date at the top and publish the new version at the same URL as this one. Material changes will also be reflected in the extension's Chrome Web Store listing description.</p>
+
+    <h2>12. Contact</h2>
+    <p>For questions about this policy or the extension, please open an issue on the project's GitHub repository. Because Blanq does not collect personal data, there is no data-subject access, deletion, or portability request to file — there is no stored data to access, delete, or export.</p>
+
+    <h2>13. Disclaimer</h2>
+    <p>Blanq is an independent, unofficial tool. "ChatGPT" and "GPT" are trademarks of OpenAI. This extension is not affiliated with, endorsed by, or sponsored by OpenAI. Your use of ChatGPT through Blanq remains subject to OpenAI's terms.</p>
+
+    <footer>
+      © 2026 Blanq
+    </footer>
+  </div>
+</body>
+</html>
