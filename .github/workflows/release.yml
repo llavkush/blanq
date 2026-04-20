@@ -1,0 +1,27 @@
+name: Build and release extension ZIP
+
+on:
+  push:
+    tags:
+      - "v*"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Zip extension/
+        run: |
+          cd extension
+          zip -r ../blanq-extension.zip .
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: blanq-extension.zip
+          generate_release_notes: true
