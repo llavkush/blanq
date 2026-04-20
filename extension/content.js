@@ -99,6 +99,15 @@ function createPanel() {
           Blanq does not collect, store, or send any of your data anywhere.
           All actions run locally in your browser.
         </p>
+
+        <h3>Links</h3>
+        <p class="delgpt-help-p delgpt-links">
+          <a href="https://llavkush.github.io/blanq/" target="_blank" rel="noopener">Home</a>
+          <span>·</span>
+          <a href="https://llavkush.github.io/blanq/privacy.html" target="_blank" rel="noopener">Privacy policy</a>
+          <span>·</span>
+          <a href="https://github.com/llavkush/blanq" target="_blank" rel="noopener">GitHub</a>
+        </p>
       </div>
     </div>
     <div class="delgpt-controls">

@@ -316,6 +316,13 @@
   text-underline-offset: 2px;
 }
 .delgpt-help-p a:hover { color: #10a37f; }
+.delgpt-links {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+.delgpt-links span { color: var(--dg-border); }
 
 .delgpt-credit {
   margin-top: 18px;
